@@ -49,6 +49,8 @@ class ChromeSearch(unittest.TestCase):
         driver.get("https://the-internet.herokuapp.com/hovers")
         driver.save_screenshot("screenshot.png")
         assert "https://the-internet.herokuapp.com/hovers" == driver.current_url
+        assert len(driver.find_elements(By.CSS_SELECTOR, ".figure")) == 3
+
        
     def test_if_hover_shows_informations(self):
         driver = self.driver
@@ -62,9 +64,11 @@ class ChromeSearch(unittest.TestCase):
     def test_if_viewprofile_link_works(self):
         driver = self.driver
         driver.get("https://the-internet.herokuapp.com/hovers")
-        time.sleep(2)
         
-        for i in range(1, 4):
+        time.sleep(2)
+       
+        profiles = len(driver.find_elements(By.CSS_SELECTOR, ".figure"))                    
+        for i in range(1, profiles):
             driver.get("https://the-internet.herokuapp.com/hovers")
             time.sleep(1)
             link_username = hover_on_profile(driver,i)
@@ -86,20 +90,3 @@ class ChromeSearch(unittest.TestCase):
 if __name__ == "__main__":
     unittest.main()
 
-
-#{path to python.exe} {path to test file} // python path to test file
-
-
-
-
-
-#  def test_if_hover_hides_information
-# def test_search_in_python_org(self):
-#         driver = self.driver
-#         driver.get("https://the-internet.herokuapp.com/hovers")
-#         driver.save_screenshot("screenshot.png")
-#         self.assertIn("Python", driver.title)
-#         elem = driver.find_element(By.NAME, "q")
-#         elem.send_keys("getting started with python")
-#         elem.send_keys(Keys.RETURN)
-#         assert "https://www.python.org/search/?q=getting+started+with+python&submit=" == driver.current_url
